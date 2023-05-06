@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LabSeq Sequence</title>
+</head>
+<body>
+    <h1>LabSeq Sequence Calculator</h1>
+    <form>
+        <label for="n">Digite um número > 0 :</label>
+        <input type="text" id="n" name="n">
+        <button type="button" onclick="calculate()">Calcular</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        function calculate() {
+            var n = document.getElementById("n").value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = "O valor de  l(" + n + ") is " + this.responseText;
+                }
+            };
+            xhr.open("GET", "/labseq/" + n, true);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
+
